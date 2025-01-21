@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="iw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scrolling Words</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Handjet:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: black;
+            color: #D8BFD8; /* Light purple color */
+            font-size: 2em;
+            overflow: hidden;
+            font-family: 'Handjet', sans-serif;
+        }
+        .word-container {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .word {
+            white-space: nowrap;
+            display: inline-block;
+        }
+        .scroll-left-right {
+            animation: scroll-left-right 20s linear infinite;
+        }
+        .scroll-right-left {
+            animation: scroll-right-left 20s linear infinite;
+        }
+        @keyframes scroll-left-right {
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-100%); }
+        }
+        @keyframes scroll-right-left {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(0%); }
+        }
+        .scrolling {
+            display: flex;
+            width: 200%; /* To make the scrolling line twice as long */
+        }
+    </style>
+</head>
+<body>
+    <div class="word-container">
+        <div class="scrolling scroll-left-right">
+            <div class="word">אריה פיל ג'ירפה כלב חתול תל אביב ירושלים ידוען מפתיע לברך לכתוב לנסוע מתנה חג כרטיס</div>
+            <div class="word">אריה פיל ג'ירפה כלב חתול תל אביב ירושלים ידוען מפתיע לברך לכתוב לנסוע מתנה חג כרטיס</div>
+        </div>
+        <div class="scrolling scroll-right-left">
+            <div class="word">משחק שולחן בית פרחים עץ נאצה תעופה לקרוא לצייר לשחק חלום קסום טבע יפה הירח שמש</div>
+            <div class="word">משחק שולחן בית פרחים עץ נאצה תעופה לקרוא לצייר לשחק חלום קסום טבע יפה הירח שמש</div>
+        </div>
+        <!-- Add more rows as needed -->
+    </div>
+
+    <script>
+        const words1 = ["אריה", "פיל", "ג'ירפה", "כלב", "חתול", "תל אביב", "ירושלים", "ידוען", "מפתיע", "לברך", "לכתוב", "לנסוע", "מתנה", "חג", "כרטיס"];
+        const words2 = ["משחק", "שולחן", "בית", "פרחים", "עץ", "נאצה", "תעופה", "לקרוא", "לצייר", "לשחק", "חלום", "קסום", "טבע", "יפה", "הירח", "שמש"];
+        
+        const container = document.querySelector('.word-container');
+        
+        for (let i = 0; i < 10; i++) {
+            const div = document.createElement("div");
+            div.className = "scrolling " + (i % 2 === 0 ? "scroll-left-right" : "scroll-right-left");
+            div.innerHTML = `<div class="word">${words1.concat(words2).sort(() => 0.5 - Math.random()).join(' ')}</div>
+                             <div class="word">${words1.concat(words2).sort(() => 0.5 - Math.random()).join(' ')}</div>`;
+            container.appendChild(div);
+        }
+    </script>
+</body>
+</html>
